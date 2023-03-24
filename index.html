@@ -80,11 +80,6 @@
             text-align: center;
             transition: .1s;
             border: 2px var(--AccentColor) solid;
-            position: absolute;
-            bottom: 10%;
-            left: 35%;
-            width: 30vw;
-            margin: auto;
         }
 
         button:hover{
@@ -98,6 +93,14 @@
             color: #ddd;
             transform: translateY(4px);
             transition: .2s;
+        }
+
+        .button-container{
+            position: absolute;
+            bottom: 10%;
+            left: 35%;
+            width: 30vw;
+            margin: auto;
         }
 
         #error{
@@ -176,9 +179,12 @@
                 transform: none;
             }
             button {
+
+            }
+            .button-container{
                 width: 80vw;
                 left: 10vw;
-            }
+        }
             input{
             font-size: .9em;
             padding: 16px 18px 16px 18px;
@@ -191,7 +197,10 @@
     <div class="generate">
         <div id="title">What is Gyan?</div>
         <div id="main">Gyan</div>
-        <button id="regenerate">Regenerate</button>
+        <div class="button-container">
+            <button id="regenerate">Regenerate</button>
+            <button id="tweet">Tweet</button>
+        </div>
     </div>
 
     <div class="ask">
@@ -203,8 +212,9 @@
         placeholder="What's your name?"
         >
         <p></p>
-        <button id="generate">Generate</button>
-
+        <div class="button-container">
+            <button id="generate">Generate</button>
+        </div>
         <p id="error"></p>
     </div>
     <script>
@@ -376,7 +386,16 @@
                 document.querySelector("#name-textbox").value = document.querySelector("#name-textbox").value.toUpperCase();
             });
 
+            // fn to take content of array expand at position lastpicked and share it in a tweet
+            function shareTweet() {
+                var tweet = "https://twitter.com/intent/tweet?text=" + name + " stands for " + expand[lastpicked] + ". Find out what your name really stands for at gyanl.com/whatis";
+                window.open(tweet, "_blank");
+            }
 
+            // event listener for button with id "twitter" that runs shareTweet()
+            document.querySelector("#tweet").addEventListener("click", function() {
+                shareTweet();
+            });
 
       
       </script>
