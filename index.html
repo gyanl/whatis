@@ -34,6 +34,7 @@
             padding: 0;
             text-align: center;
             color: var(--AccentColor);
+            transform: .2s;
         }
         #main {
             font-size: 4em;
@@ -166,6 +167,7 @@
         <div id="title">Get Your Acronym Now</div>
         <p>Type something to start generating your own acronym</p>
         <input 
+        id="name-textbox"
         type="text" 
         placeholder="Enter your name here"
         >
@@ -327,6 +329,10 @@
                 }
             });
 
+            // on every keystroke in input field with id "name-textbox", convert the content of the input field to uppercase
+            document.querySelector("#name-textbox").addEventListener("keyup", function() {
+                document.querySelector("#name-textbox").value = document.querySelector("#name-textbox").value.toUpperCase();
+            });
 
       
       </script>
