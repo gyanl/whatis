@@ -28,9 +28,13 @@
             transition: 1s;
         }
         #title {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            right: 0;
             font-size: 1em;
             font-weight: 600;
-            margin: 0 0 20px 0;
+            margin: 20 auto 20px auto;
             padding: 0;
             text-align: center;
             color: var(--AccentColor);
@@ -44,8 +48,11 @@
             padding: 0;
             text-align: center;
             color: var(--BackgroundColor);
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
         }
-
+        
         input{
             background: rgba(255, 255, 255, .08);
             border: none;
@@ -72,6 +79,11 @@
             text-align: center;
             transition: .1s;
             border: 2px var(--AccentColor) solid;
+            position: absolute;
+            bottom: 10%;
+            left: 35%;
+            width: 30vw;
+            margin: auto;
         }
 
         button:hover{
@@ -87,9 +99,11 @@
             transition: .2s;
         }
 
-        .error{
-            background-color: #fff;
-            color: var(--BackgroundColor)
+        #error{
+            font-size: .8em;
+            width: auto;
+            text: rgba(255, 255, 255, .8);
+            /* background: rgba(0, 0, 0, .8); */
         }
 
     /* class to animate from blurred element to unblurred element */
@@ -143,19 +157,28 @@
 
             /* mobile only css */
     @media only screen and (max-width: 600px) {
+
             body {
                 padding: 25% 5% 0 5%;
             }
+            #title{
+                top: 40px;
+            }
             #main {
+                position: relative;
                 font-size: 2.5em;
+                top: auto;
+                transform: none;
             }
             button {
-                position: absolute;
-                bottom: 10%;
-                left: 10%;
                 width: 80vw;
-                margin: auto;
+                left: 10vw;
             }
+            input{
+            font-size: 1.2em;
+            padding: 16px 0 16px 20px;
+            width: 80vw;
+        }
         }
     </style>
 </head>
@@ -176,6 +199,7 @@
         >
         <p></p>
         <button id="generate">Generate</button>
+
         <p id="error"></p>
     </div>
     <script>
@@ -312,20 +336,30 @@
           insertString(animateString(randomString(expand)));
           titleBounce();
 
-            // event listener for button with id "regenerate"
+          function updatePageWithNewAcronym() {
+            generateColors();
+            insertString(animateString(randomString(expand)));
+            removeBounce();
+            void document.getElementById("title").offsetWidth; // trigger reflow
+            titleBounce();
+          }
+
+            // on clicking button with id "regenerate", runs updatePageWithNewAcronym()
             document.querySelector("#regenerate").addEventListener("click", function() {
-                generateColors();
-                insertString(animateString(randomString(expand)));
-                removeBounce();
-                void document.getElementById("title").offsetWidth; // trigger reflow
-                titleBounce();
+                updatePageWithNewAcronym();
             });
+
+            // event listener for form that runs regenerate function
+            // document.querySelector("form").addEventListener("submit", function(e) {
+            //     regenerate();
+            // });
+        
 
             // event listener for button with id "generate"
             document.querySelector("#generate").addEventListener("click", function() {
-                var input = document.querySelector("input").value;
+                var input = document.querySelector("#name-textbox").value;
                 if (input == "") {
-                    document.querySelector("#error").innerHTML = "Please enter a name";
+                    document.querySelector("#error").innerHTML = "You gotta put in a name, dude.";
                 } else {
                     // navigate to new page with input passed in the url
                     window.location.href = "?name=" + input;
@@ -336,6 +370,8 @@
             document.querySelector("#name-textbox").addEventListener("keyup", function() {
                 document.querySelector("#name-textbox").value = document.querySelector("#name-textbox").value.toUpperCase();
             });
+
+
 
       
       </script>
