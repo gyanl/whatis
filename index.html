@@ -381,12 +381,12 @@
                 }
             });
 
-            // on every keystroke in input field with id "name-textbox", convert the content of the input field to uppercase
+            // Auto-uppercase for input field with id "name-textbox"
             document.querySelector("#name-textbox").addEventListener("keyup", function() {
                 document.querySelector("#name-textbox").value = document.querySelector("#name-textbox").value.toUpperCase();
             });
 
-            // fn to take content of array expand at position lastpicked and share it in a tweet
+            // Take name and expansion and put into tweet
             function shareTweet() {
                 var tweet = "https://twitter.com/intent/tweet?text=" + name + " stands for " + expand[lastpicked] + ". Find out what your name really stands for at gyanl.com/whatis";
                 window.open(tweet, "_blank");
