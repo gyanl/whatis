@@ -52,6 +52,17 @@
             top: 40%;
             left: 50%;
             transform: translate(-50%,-50%);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        /* define glow animation */
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px var(--AccentColor), 0 0 20px var(--AccentColor), 0 0 40px var(--AccentColor);
+            }
+            to {
+                text-shadow: 0 0 20px var(--AccentColor), 0 0 40px var(--AccentColor), 0 0 20px var(--AccentColor);
+            }
         }
         
         input{
@@ -109,6 +120,12 @@
             text: rgba(255, 255, 255, .8);
             /* background: rgba(0, 0, 0, .8); */
         }
+
+        .confetti{
+            background-color: var(--AccentColor);
+            z-index: -1;
+        }
+
 
     /* class to animate from blurred element to unblurred element */
     .blur-in {
@@ -195,7 +212,7 @@
 </head>
 <body>
     <div class="generate">
-        <div id="title">What is Gyan?</div>
+        <div id="title">What is <span id="name-insert">Gyan</span>?</div>
         <div id="main">Gyan</div>
         <div class="button-container">
             <button id="regenerate">Regenerate</button>
@@ -221,6 +238,10 @@
 
         // on page load, check if there is a name in the url and return it. Else return "0"
         var name = window.location.href.split("?name=")[1] || "0";
+        name = name.toUpperCase();
+
+        // set name-insert to name
+        document.querySelector("#name-insert").innerHTML = name;
 
         // fn viewdecider makes "ask" class visible if there is no name in the url, else makes "answer" class visible
         function viewDecider(name) {
@@ -230,54 +251,149 @@
                 document.querySelector(".generate").style.display = "block";
             }
         }
-
+        
         // run function viewdecider on page load
         viewDecider(name);
 
-        var expand = new Array(
-          "Great Yearning And Nurturing",
-          "Gorgeous Yellow Autumn Nights",
-          "Glittering Yoga And Nootropics",
-          "Global Youth Action Network",
-          "Graceful Yet Assertive News",
-          "Guiding You Along Navigation",
-          "Gourmet Yummy Appetizing Nibbles",
-          "Greatness Yielding Abundant Nirvana",
-          "Growing Your Artistic Nature",
-          "Generate Yogurt Abundance Now",
-          "Going Yonder And Navigating",
-          "Grateful Yearly Appreciation Newsletter",
-          "Gallant Youth Adventure Network",
-          "Grounded Yet Adventurous Nature",
-          "Goodbye Yesterday, Announcing Now",
-          "Grow Your Ability Naturally",
-          "Grinning Yaks? Absolutely Never.",
-          "Gain Your Autonomy Now",
-          "Get Your Act Noticed",
-          "Giving Yourself Ample Nurturing",
-          "Get Your Abacus Nuked",
-          "Generally You Achieve Nirvana",
-          "Genuinely Yours, Always Nurturing",
-          "Growing Your Artistic Network",
-          "Glimpse Your Awesome Nebula",
-          "Great Yearning And Naivety",
-          "Generally Yes, Arguably NO",
-          "Gallantly Yielding Abundant Nourishment",
-          "Gleaning Your Aura Naturally",
-          "Guiding Your Ambitions Nicely",
-          "Get Your Answers Now",
-          "Giant Yaks Are Nice",
-          "Giraffes Yodeling And Napping",
-          "Ghosts Yelling At Night",
-          "Giant Yetis Attack Nerdiness",
-          "Generalized YAML Adapter for Node",
-          "Get Yourself Another Name",
-          "Goddamn You Are Nasty",
-          "Great Yawns Accompanying Naps",
-          "Glorify Your Abundant Neuroses",
-          "Green Yolks Are Nasty",
-          "Generate Your Alibis Now",
+        var GYAN = new Array(
+            "Great Yearning And Nurturing",
+            "Gorgeous Yellow Autumn Nights",
+            "Glittering Yoga And Nootropics",
+            "Global Youth Action Network",
+            "Graceful Yet Assertive News",
+            "Guiding You Along Navigation",
+            "Gourmet Yummy Appetizing Nibbles",
+            "Greatness Yielding Abundant Nirvana",
+            "Growing Your Artistic Nature",
+            "Generate Yogurt Abundance Now",
+            "Going Yonder And Navigating",
+            "Grateful Yearly Appreciation Newsletter",
+            "Gallant Youth Adventure Network",
+            "Grounded Yet Adventurous Nature",
+            "Goodbye Yesterday, Announcing Now",
+            "Grow Your Ability Naturally",
+            "Grinning Yaks? Absolutely Never.",
+            "Gain Your Autonomy Now",
+            "Get Your Act Noticed",
+            "Giving Yourself Ample Nurturing",
+            "Get Your Abacus Nuked",
+            "Generally You Achieve Nirvana",
+            "Genuinely Yours, Always Nurturing",
+            "Growing Your Artistic Network",
+            "Glimpse Your Awesome Nebula",
+            "Great Yearning And Naivety",
+            "Generally Yes, Arguably NO",
+            "Gallantly Yielding Abundant Nourishment",
+            "Gleaning Your Aura Naturally",
+            "Guiding Your Ambitions Nicely",
+            "Get Your Answers Now",
+            "Giant Yaks Are Nice",
+            "Giraffes Yodeling And Napping",
+            "Ghosts Yelling At Night",
+            "Giant Yetis Attack Nerdiness",
+            "Generalized YAML Adapter for Node",
+            "Get Yourself Another Name",
+            "Goddamn You Are Nasty",
+            "Great Yawns Accompanying Naps",
+            "Glorify Your Abundant Neuroses",
+            "Green Yolks Are Nasty",
+            "Generate Your Alibis Now",
         );
+        
+        var YAMINI = new Array(
+            "Yodeling Astronaut, Masterfully Inventive, Notably Imaginative",
+            "Youthful Artisan, Mischievously Ingenious, Naturally Impressive",
+            "Yak-Wrangling, Always Merry, Incredibly Nutty Individual",
+            "Yoga-Doing, Amusing, Marvelously Intelligent, Notoriously Innovative",
+            "Yearning for Adventure, Magnificently Imaginative, Nonstop Inspiration",
+            "Yummy Almond Milk Inventor, Nurturing Ingenuity",
+            "Yellow Armadillos' Manager, Instigating Nutty Inventions",
+            "Yacht-Building, Amiable, Marvelously Ingenious, Notably Independent",
+            "Yeti-Admiring, Magnificently Imaginative, Never Idle",
+            "Yawning Artist, Making Incredible, Noteworthy Illustrations",
+        );
+
+        var ANANYA = new Array(
+            "Alien Negotiator, Amazingly Nutty And Yodeling Artist",
+            "Astonishingly Nimble, Adorably Nutty, Yowling Acrobat",
+            "Amiable Narwhal Adventurer, Yodeling Astronaut",
+            "Acrobatic Ninja, Artistically Nutty, Yacht-Builder Adept",
+            "Astronaut Nurturing Adorable, Newborn Yeti Ambassadors",
+            "Alluring Nonsense Advocate, Yearning for Amusement",
+            "Adorably Nutty, Always Yawning and Amusing",
+            "Animatedly Navigating Anarchy, Yodeling Aviator",
+            "Avid Napper, Anarchist, Yarn-Throwing Artisan",
+            "Astoundingly Nutty, Always Yelling Antagonist",
+            "Adorable, Nurturing, Always Noble, Youthful Angel",
+            "Amazing, Noble, Affectionate, Nurturing, Youthful, Admirable",
+            "Artistic, Nourishing, Ambitious, Nature-loving, Yummy, Appreciative",
+            "Always Nurturing, Adoring, Nourishing, Young Achiever",
+            "Amiable, Noble, Always Nurturing, Youthful, Aspiring",
+        );
+
+        var ANUSHRI = new Array(
+            "Adventurous, Nifty, Unstoppable, Superhero, Radiant, Inventive",
+            "Artistic, Noble, Uniquely Spirited, Harmonious, Radiant, Imaginative",
+            "Astronaut Navigator, Unearthing Secrets, Highly Resourceful, Innovative",
+            "Agile, Nurturing, Unwaveringly Supportive, Humorous, Radiant, Inspiring",
+            "Ambitious, Natural, Unconventional, Serene, Humble, Resolute, Intellectual",
+            "Animated, Nurturing, Unbelievably Sharp, Hopeful, Rejoicing, Ingenious",
+            "Astute, Navigating, Upbeat, Sincere, Heartfelt, Resilient, Invigorating",
+            "Artful, Noteworthy, Unyielding, Sensitive, Harmonious, Refined, Intuitive",
+            "Adaptable, Nature-loving, Unstoppable, Soulful, Radiant, Imaginative",
+            "Authentic, Nourishing, Undaunted, Spirited, Rejoicing, Inspiring",
+            "An Unwavering Star, Helping Radiant Ideas Flourish",
+            "Always Nurturing, Uniting Strengths, Hearts Rejoice Incessantly",
+            "Adventures Navigate Uncharted Spaces, Her Resolve Inspires",
+            "Astonishingly Nimble, Undeniably Spirited, Harmony Reigns Inward",
+            "Agile Navigator, Unraveling Secrets, Heroes Rise Inevitably",
+        );
+
+        var TEJUS = new Array(
+            "Terrifically Enthusiastic, Joyful, Unstoppable, Spirited",
+            "Talented Engineer, Juggling Unbelievable Stunts",
+            "Time-traveling Explorer, Jovial, Unwaveringly Sincere",
+            "Theatrical Entertainer, Jester, Uncommonly Skilled",
+            "Technologically Elite, Juggling Unforgettable Solutions",
+            "Tireless Educator, Joyfully Unraveling Secrets",
+            "Triumphant, Energetic, Just, Uniquely Spectacular",
+            "Trailblazing, Electric, Jolly, Unyieldingly Steadfast",
+            "Totally Engaging, Jovially Unpredictable Storyteller",
+            "Tenacious, Eclectic, Jazzy, Unabashedly Sparkling",
+        );
+
+        var NITHIN = new Array(
+            "Notoriously Imaginative, Totally Humorous, Irresistibly Nifty",
+            "Naturally Intelligent, Tenacious, Highly Innovative, Noteworthy",
+            "Nimble, Ingenious, Talented, Humble, Imaginative, Nurturing",
+            "Nice, Intuitive, Technically skilled, Highly Imaginative, Noble",
+            "Noble, Inspirational, Thoughtful, Hardworking, Intuitive, Neighborly",
+            "Nacho-Inventing, Totally Hilarious, Incredibly Nifty",
+            "Napping In The Hammock, Incredibly Nonchalant",
+            "Nerd Inventing The Hottest Internet Nonsense",
+            "Notably Impressive Tickling, Hysterical, Ingenious Noisemaker",
+            "Ninja In Training, Hilariously Imitating Ninjas"
+        );
+
+        // get array by name
+        function getArrayByName(name) {
+            if (name == "YAMINI") {
+                return YAMINI;
+            } else if (name == "ANANYA") {
+                return ANANYA;
+            } else if (name == "ANUSHRI") {
+                return ANUSHRI;
+            } else if (name == "TEJUS") {
+                return TEJUS;
+            } else if (name == "NITHIN") {
+                return NITHIN;
+            } else {
+                return GYAN;
+            }
+        }
+
+        var expand = getArrayByName(name);
+
 
           var lastpicked = 0;
           // function to take an array and return a random string
@@ -346,7 +462,7 @@
                 var title = document.getElementById("title");
                 title.classList.remove("bounce-in");
             }
-
+        
           generateColors();
           insertString(animateString(randomString(expand)));
           titleBounce();
@@ -396,6 +512,27 @@
             document.querySelector("#tweet").addEventListener("click", function() {
                 shareTweet();
             });
+
+                // generate confetti
+                setInterval(function() {
+                var x = Math.floor(Math.random() * window.innerWidth);
+                var y = Math.floor(Math.random() * window.innerHeight);
+                var size = Math.floor(Math.random() * 10);
+
+                var confetti = document.createElement("div");
+                confetti.classList.add("confetti");
+                confetti.style.position = "absolute";
+                confetti.style.left = x + "px";
+                confetti.style.top = y + "px";
+                confetti.style.width = size + "px";
+                confetti.style.height = size + "px";
+                confetti.style.borderRadius = "50%";
+                confetti.style.opacity = Math.random();
+                document.body.appendChild(confetti);
+                setTimeout(function() {
+                    confetti.remove();
+                }, 2000);
+            }, 100);
 
       
       </script>
